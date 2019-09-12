@@ -1,9 +1,9 @@
 class Node
   attr_reader :left_child, :right_child, :value
   attr_accessor :parent
-  def initialize(value=nil, parent=nil)
+  def initialize(value=nil)
     @value = value
-    @parent= parent
+    @parent= nil
     @left_child = nil
     @right_child = nil
   end
