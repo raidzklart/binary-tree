@@ -62,16 +62,23 @@ class BinaryTree
     return nil
   end
 
-  def to_s
-    build_string(@root)
+  def depth_first_search(target)
+    stack = [@root]
+    until stack.empty?
+      node = stack.pop
+      return node if node.value == target
+      stack.push node.left_child unless node.left_child.nil?
+      stack.push node.right_child unless node.right_child.nil?
+    end
+    return nil
   end
 
-  def build_string(root)
-    str = %{#{root.value unless root.nil?}
-#{build_string(root.left_child) unless root.left_child.nil?}  #{build_string(root.right_child) unless root.right_child.nil?}}
-    str
+  def recursive_dfs(target, node = @root)
+    return node if node.value == target
+    recursive_dfs(target, node.left_child) unless node.left_child.nil?
+    recursive_dfs(target, node.right_child) unless node.right_child.nil?
   end
 end
 
 tree = BinaryTree.new([1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324])
-p tree.breadth_first_search(67)
+p tree.recursive_dfs(67)
